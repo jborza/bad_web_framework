@@ -1,26 +1,34 @@
-function handler(arg){
-    console.log(arg.target);
+
+
+function create_list() {
+    array = [];
+    array.push(create_node('Read a C tutorial online',true));
+    //array.push(create_node('Read about HTML',false));
+    //array.push(create_node('Write a web framework',false));
+    return array;
 }
 
-var container = create_element('div');
-var checkbox = create_element("input");
-set_attribute(checkbox, "type", "checkbox");
-add_child(container, checkbox);
+function create_node(title, done) {
+    return {
+        title: title,
+        done: done
+    }
+}
 
-var label = create_element("span");
-set_text_content(label,"Go shopping");
+sampleModelState = {
+    title: "Sample ToDo item",
+    done: false
+}
 
-add_child(container, label);
 
-var editbox = create_element("input");
-set_attribute(editbox, "type", "text");
-set_attribute(editbox, "placeholder", "What do you want to do?");
-add_child(container, editbox);
 
-var button = create_element("input");
-set_attribute(button, "type", "button");
-set_attribute(button, "value", "Save");
-add_click_handler(button, handler);
-add_child(container, button);
+function main(){
+    todo_items = create_list();
+    for(todo_item of todo_items){
+        state = create_todoitem_viewstate(todo_item);
+        layout(state);
+        render(state);
+    }
+}
 
-add_child(document.getElementById("_body"), container);
+main();
