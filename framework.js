@@ -19,9 +19,13 @@ function get_attribute(el,attr){
 }
 
 function set_element_visible(el,visible){
-    el.style.display = visible?'block':'none';
+    el.hidden = !visible;
 }
 
 function add_click_handler(el, handler){
     el.onclick = handler;
+}
+
+function set_checkbox_checked(el, checked){
+    el.checked = checked;
 }
