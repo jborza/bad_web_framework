@@ -14,6 +14,14 @@ function set_text_content(el, body){
     el.textContent = body;
 }
 
+function set_value(el, value){
+    el.value = value;
+}
+
+function get_value(el){
+    return el.value;
+}
+
 function get_attribute(el,attr){
     return el.get_attribute(attr);
 }
@@ -22,10 +30,17 @@ function set_element_visible(el,visible){
     el.hidden = !visible;
 }
 
-function add_click_handler(el, handler){
-    el.onclick = handler;
+function add_click_handler(el, handler, viewstate){
+    wrapped_handler = curry(handler, viewstate);
+    el.onclick = wrapped_handler;
 }
 
 function set_checkbox_checked(el, checked){
     el.checked = checked;
+}
+
+function curry(fn, ...args) {
+    return (..._arg) => {
+        return fn(...args, ..._arg);
+    }
 }

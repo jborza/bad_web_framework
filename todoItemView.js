@@ -11,12 +11,19 @@ function create_todoitem_viewstate(item) {
     };
 }
 
-function save_clicked_handler(arg) {
-    console.log(arg.target);
+function save_clicked_handler(viewstate, target) {
+    viewstate.editing = false;
+    save_changes(viewstate);
+    todoitem_render(viewstate);
 }
 
-function edit_clicked_handler(arg) {
-    console.log(arg.target);
+function save_changes(vs){
+    vs.item.title = get_value(vs.editbox);
+}
+
+function edit_clicked_handler(viewstate, target) {
+    viewstate.editing = true;
+    todoitem_render(viewstate);
 }
 
 //vs = viewstate
@@ -32,7 +39,7 @@ function todoitem_layout(vs){
     vs.edit_button = create_element("input");
     set_attribute(vs.edit_button, "type", "button");
     set_attribute(vs.edit_button, "value", "Edit");
-    add_click_handler(vs.edit_button, edit_clicked_handler);
+    add_click_handler(vs.edit_button, edit_clicked_handler, vs);
     add_child(vs.container, vs.edit_button);
     
     vs.editbox = create_element("input");
@@ -43,7 +50,7 @@ function todoitem_layout(vs){
     vs.save_button = create_element("input");
     set_attribute(vs.save_button, "type", "button");
     set_attribute(vs.save_button, "value", "Save");
-    add_click_handler(vs.save_button, save_clicked_handler);
+    add_click_handler(vs.save_button, save_clicked_handler, vs);
     add_child(vs.container, vs.save_button);
     
     add_child(document.getElementById("_body"), vs.container);
@@ -59,6 +66,6 @@ function todoitem_render(vs){
     set_element_visible(vs.editbox, vs.editing);
     //content
     set_text_content(vs.label, vs.item.title);
-    set_text_content(vs.edit_button, vs.item.title);
+    set_value(vs.editbox, vs.item.title);
     set_checkbox_checked(vs.checkbox, vs.item.done);
 }
