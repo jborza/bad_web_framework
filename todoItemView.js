@@ -26,11 +26,17 @@ function edit_clicked_handler(viewstate, target) {
     todoitem_render(viewstate);
 }
 
+function checkbox_checked_handler(viewstate, target){
+    viewstate.item.done = get_checkbox_checked(viewstate.checkbox);
+    console.log("setting done of"+viewstate.item.title +" to "+viewstate.item.done);
+}
+
 //vs = viewstate
 function todoitem_layout(vs){
     vs.container = create_element('div');
     vs.checkbox = create_element("input");
     set_attribute(vs.checkbox, "type", "checkbox");
+    add_change_handler(vs.checkbox, checkbox_checked_handler, vs);
     add_child(vs.container, vs.checkbox);
     
     vs.label = create_element("span");

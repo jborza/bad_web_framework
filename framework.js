@@ -35,12 +35,25 @@ function add_click_handler(el, handler, viewstate){
     el.onclick = wrapped_handler;
 }
 
+function add_change_handler(el, handler, viewstate){
+    wrapped_handler = curry(handler, viewstate);
+    el.onchange = wrapped_handler;
+}
+
 function set_checkbox_checked(el, checked){
     el.checked = checked;
+}
+
+function get_checkbox_checked(el){
+    return el.checked;
 }
 
 function curry(fn, ...args) {
     return (..._arg) => {
         return fn(...args, ..._arg);
     }
+}
+
+function get_root(){
+    return document.getElementById("_body");
 }
