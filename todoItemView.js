@@ -44,7 +44,7 @@ function todoitem_layout(vs){
 
     vs.edit_button = create_element("input");
     set_attribute(vs.edit_button, "type", "button");
-    set_attribute(vs.edit_button, "value", "Edit");
+    set_value(vs.edit_button, "Edit");
     add_click_handler(vs.edit_button, edit_clicked_handler, vs);
     add_child(vs.container, vs.edit_button);
     
@@ -55,11 +55,11 @@ function todoitem_layout(vs){
     
     vs.save_button = create_element("input");
     set_attribute(vs.save_button, "type", "button");
-    set_attribute(vs.save_button, "value", "Save");
+    set_value(vs.save_button, "Save");
     add_click_handler(vs.save_button, save_clicked_handler, vs);
     add_child(vs.container, vs.save_button);
     
-    add_child(document.getElementById("_body"), vs.container);
+    add_child(get_root(), vs.container);
 }
 
 function todoitem_render(vs){
