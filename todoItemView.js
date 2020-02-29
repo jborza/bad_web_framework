@@ -32,7 +32,7 @@ function checkbox_checked_handler(viewstate, target){
 }
 
 //vs = viewstate
-function todoitem_layout(vs){
+function todoitem_layout(vs, root_container){
     vs.container = create_element('div');
     vs.checkbox = create_element("input");
     set_attribute(vs.checkbox, "type", "checkbox");
@@ -59,7 +59,7 @@ function todoitem_layout(vs){
     add_click_handler(vs.save_button, save_clicked_handler, vs);
     add_child(vs.container, vs.save_button);
     
-    add_child(get_root(), vs.container);
+    add_child(root_container, vs.container);
 }
 
 function todoitem_render(vs){

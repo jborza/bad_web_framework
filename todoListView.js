@@ -44,7 +44,6 @@ function filter_layout(vs, filter_container){
     set_text_content(done_label, "Completed");
     add_child(done_label, done);
     add_child(filter_container, done_label);
-
 }
 
 
@@ -54,38 +53,42 @@ function listview_layout(vs){
     var title = create_element("h1");
     set_text_content(title, "todos");
     add_child(vs.container, title);
-    //render an empty todo item
+    
+    //TODO render an empty todo item ("create new")
     
     
     //render children
+    var item_container = create_element("div");
     for(todo_item of model.items){
         state = create_todoitem_viewstate(todo_item);
         vs.item_states.push(state);
-        todoitem_layout(state);
+        todoitem_layout(state, item_container);
     }
+    add_child(vs.container, item_container);
 
     //render [x] item left (counter of not items not done)
     vs.item_status_counter = create_element("span");
-    
     add_child(vs.container, vs.item_status_counter);
 
     //render selector for all / active / completed ()
-    //<ul class=filters><li>All</li><li>Active</li><li>Completed</li></ul>
     var filter_container = create_element("div");
     filter_layout(vs, filter_container);
     add_child(vs.container, filter_container);
+
     //render "clear completed" button
     vs.clear_completed = create_element("input");
     set_attribute(vs.clear_completed,"type","button");
     set_value(vs.clear_completed, "Clear completed");
     add_click_handler(vs.clear_completed, clear_completed_handler, vs);
     add_child(vs.container, vs.clear_completed);
-    //delete item functionality?
+    // TODO delete item functionality?
     add_child(get_root(), vs.container);
 }
 
 function listview_render(vs){
     set_text_content(vs.item_status_counter, getItemsLeft(vs.model) + " items left");
+
+    //TODO highlight the filter (all/active/done)
 
     //update items
     for(todo_item of model.items){
