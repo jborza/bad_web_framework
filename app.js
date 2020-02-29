@@ -27,11 +27,11 @@ function main(){
     listview_layout(list_state);
     listview_render(list_state);
     //TODO remove and move to todolistview
-    for(todo_item of model.items){
-        state = create_todoitem_viewstate(todo_item);
-        todoitem_layout(state);
-        todoitem_render(state);
-    }
+    // for(todo_item of model.items){
+    //     state = create_todoitem_viewstate(todo_item);
+    //     todoitem_layout(state);
+    //     todoitem_render(state);
+    // }
 }
 
 main();
