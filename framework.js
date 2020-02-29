@@ -57,3 +57,14 @@ function curry(fn, ...args) {
 function get_root(){
     return document.getElementById("_body");
 }
+
+signal_map = {};
+
+function raise_signal(signal, data){
+    console.log('Raised signal:', signal ," data:", data );
+    signal_map[signal](data);
+}
+
+function connect_signal(signal, handler){
+    signal_map[signal] = handler;
+}

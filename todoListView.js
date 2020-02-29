@@ -2,7 +2,7 @@ function create_todolist_viewstate(model) {
     return {
         model: model,
         container: null,
-        emptyItemView: null,
+        empty_item_view: null,
         item_status_counter: null,
         itemFilter: null,
         clear_completed: null,
@@ -46,6 +46,9 @@ function filter_layout(vs, filter_container){
     add_child(filter_container, done_label);
 }
 
+function save_new_item_signal_handler(parameters){
+    console.log("todolistview handle signal: ",parameters);
+}
 
 function listview_layout(vs){
     vs.container = create_element("div");
@@ -54,8 +57,13 @@ function listview_layout(vs){
     set_text_content(title, "todos");
     add_child(vs.container, title);
     
-    //TODO render an empty todo item ("create new")
-    
+    //render an empty todo item ["create new"]
+    var empty_item_container = create_element("div");
+    vs.empty_item_view = undefined;
+    var empty_item_state = create_empty_item_viewstate();
+    empty_todoitem_layout(empty_item_state, empty_item_container);
+    connect_signal(SIGNAL_SAVE_NEW_ITEM, save_new_item_signal_handler);
+    add_child(vs.container, empty_item_container);
     
     //render children
     var item_container = create_element("div");
@@ -81,6 +89,7 @@ function listview_layout(vs){
     set_value(vs.clear_completed, "Clear completed");
     add_click_handler(vs.clear_completed, clear_completed_handler, vs);
     add_child(vs.container, vs.clear_completed);
+
     // TODO delete item functionality?
     add_child(get_root(), vs.container);
 }
@@ -91,6 +100,7 @@ function listview_render(vs){
     //TODO highlight the filter (all/active/done)
 
     //update items
+    //also - what will happen when an item gets created or deleted??
     for(todo_item of model.items){
         //get corresponding view state ? 
         //probably bad, should be referencing the todoitemview itself
