@@ -4,7 +4,7 @@ function create_todolist_viewstate(model) {
         container: null,
         empty_item_view: null,
         item_status_counter: null,
-        itemFilter: null,
+        item_filter: null,
         clear_completed: null,
         item_states: []
     }
@@ -105,6 +105,7 @@ function listview_render(vs) {
     set_text_content(vs.item_status_counter, getItemsLeft(vs.model) + " items left");
 
     //TODO highlight the filter (all/active/done)
+    
 
     //update items
     //also - what will happen when an item gets created or deleted??

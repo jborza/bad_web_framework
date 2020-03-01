@@ -8,7 +8,7 @@ function create_empty_item_viewstate() {
 const SIGNAL_SAVE_NEW_ITEM = "save_new_item";
 
 function empty_save_clicked_handler(vs, target) {
-    //TODO raise signal that the new item is done editing
+    //raise signal that the user is done editing
     var title = get_value(vs.editbox);
     raise_signal(SIGNAL_SAVE_NEW_ITEM, title);
 }
