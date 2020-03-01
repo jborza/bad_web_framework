@@ -17,6 +17,10 @@ function clear_completed_handler(viewstate, target) {
 }
 
 function filter_layout(vs, filter_container) {
+    var filter_label = create_element("span");
+    set_text_content(filter_label, "Show:");
+    add_child(filter_container, filter_label);
+
     //render selector for all / active / completed ()
     var all = create_element("input");
     set_attribute(all, "type", "radio");
@@ -43,7 +47,7 @@ function filter_layout(vs, filter_container) {
     set_attribute(done, "name", "filter");
     set_attribute(done, "value", "done");
     var done_label = create_element("label");
-    set_text_content(done_label, "Completed");
+    set_text_content(done_label, "Done");
     add_child(done_label, done);
     add_child(filter_container, done_label);
 }
@@ -82,6 +86,7 @@ function listview_layout(vs) {
 
     //render selector for all / active / completed ()
     var filter_container = create_element("div");
+    set_class(filter_container, "filter");
     filter_layout(vs, filter_container);
     add_child(vs.container, filter_container);
 

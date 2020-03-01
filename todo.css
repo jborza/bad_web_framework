@@ -46,3 +46,19 @@ body {
 .new-item {
     padding: 0 0 0 64px;
 }
+
+.app .filter label {
+    background: #eee;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 0 8px 0 0;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.app .filter label:hover {
+    background: #ccc;
+}
+
+
+/* TODO add strikethrough on completed items */
