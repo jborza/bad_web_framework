@@ -1,10 +1,12 @@
-
-
 function create_list() {
     array = [];
-    array.push(create_node('Read a C tutorial online',true));
-    array.push(create_node('Read about HTML',false));
-    array.push(create_node('Write a web framework',false));
+    array.push(create_node('Read a C tutorial online', true));
+    array.push(create_node('Read about HTML', true));
+    array.push(create_node('Write a web framework', false));
+    array.push(create_node('Strikethrough done items', false));
+    array.push(create_node('Add a delete button', false));
+    array.push(create_node('Fix edit/read mode for todoitemview', false));
+    array.push(create_node('Signal todo state change to parent model', false));
     return array;
 }
 
@@ -20,7 +22,7 @@ sampleModelState = {
     done: false
 }
 
-function main(){
+function main() {
     model = create_todo_model();
     model.items = create_list();
     list_state = create_todolist_viewstate(model);
