@@ -17,7 +17,7 @@ function save_clicked_handler(viewstate, target) {
     todoitem_render(viewstate);
 }
 
-function save_changes(vs){
+function save_changes(vs) {
     vs.item.title = get_value(vs.editbox);
 }
 
@@ -26,19 +26,19 @@ function edit_clicked_handler(viewstate, target) {
     todoitem_render(viewstate);
 }
 
-function checkbox_checked_handler(viewstate, target){
+function checkbox_checked_handler(viewstate, target) {
     viewstate.item.done = get_checkbox_checked(viewstate.checkbox);
-    console.log("setting done of"+viewstate.item.title +" to "+viewstate.item.done);
+    console.log("setting done of" + viewstate.item.title + " to " + viewstate.item.done);
 }
 
 //vs = viewstate
-function todoitem_layout(vs, root_container){
+function todoitem_layout(vs, root_container) {
     vs.container = create_element('div');
     vs.checkbox = create_element("input");
     set_attribute(vs.checkbox, "type", "checkbox");
     add_change_handler(vs.checkbox, checkbox_checked_handler, vs);
     add_child(vs.container, vs.checkbox);
-    
+
     vs.label = create_element("span");
     add_child(vs.container, vs.label);
 
@@ -47,22 +47,23 @@ function todoitem_layout(vs, root_container){
     set_value(vs.edit_button, "Edit");
     add_click_handler(vs.edit_button, edit_clicked_handler, vs);
     add_child(vs.container, vs.edit_button);
-    
+
     vs.editbox = create_element("input");
     set_attribute(vs.editbox, "type", "text");
+    set_class(vs.editbox, "editbox");
     set_attribute(vs.editbox, "placeholder", "What do you want to do?");
     add_child(vs.container, vs.editbox);
-    
+
     vs.save_button = create_element("input");
     set_attribute(vs.save_button, "type", "button");
     set_value(vs.save_button, "Save");
     add_click_handler(vs.save_button, save_clicked_handler, vs);
     add_child(vs.container, vs.save_button);
-    
+
     add_child(root_container, vs.container);
 }
 
-function todoitem_render(vs){
+function todoitem_render(vs) {
     //visibility
     //read-mode
     set_element_visible(vs.label, !vs.editing);

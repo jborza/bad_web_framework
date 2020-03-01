@@ -6,6 +6,10 @@ function set_attribute(el, attr, val){
     el.setAttribute(attr, val);
 }
 
+function set_class(el, className){
+    el.className = className;
+}
+
 function add_child(el, child){
     el.appendChild(child);
 }
@@ -55,7 +59,7 @@ function curry(fn, ...args) {
 }
 
 function get_root(){
-    return document.getElementById("_body");
+    return document.getElementById("app");
 }
 
 signal_map = {};
