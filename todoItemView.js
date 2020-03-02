@@ -34,6 +34,7 @@ function checkbox_checked_handler(viewstate, target) {
 //vs = viewstate
 function todoitem_layout(vs, root_container) {
     vs.container = create_element('div');
+    set_class(vs.container, 'item');
     vs.checkbox = create_element("input");
     set_attribute(vs.checkbox, "type", "checkbox");
     add_change_handler(vs.checkbox, checkbox_checked_handler, vs);
