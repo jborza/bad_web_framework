@@ -3,6 +3,7 @@ function create_todolist_viewstate(model) {
         model: model,
         container: null,
         empty_item_view: null,
+        item_container : null,
         item_status_counter: null,
         item_filter: null,
         clear_completed: null,
@@ -72,13 +73,9 @@ function listview_layout(vs) {
     add_child(vs.container, empty_item_container);
 
     //render children
-    var item_container = create_element("div");
-    for (todo_item of model.items) {
-        state = create_todoitem_viewstate(todo_item);
-        vs.item_states.push(state);
-        todoitem_layout(state, item_container);
-    }
-    add_child(vs.container, item_container);
+    vs.item_container = create_element("div");
+    
+    add_child(vs.container, vs.item_container);
 
     //render [x] item left (counter of not items not done)
     vs.item_status_counter = create_element("span");
@@ -108,10 +105,17 @@ function listview_render(vs) {
     
 
     //update items
-    //also - what will happen when an item gets created or deleted??
-    for (todo_item of model.items) {
-        //get corresponding view state ? 
-        //probably bad, should be referencing the todoitemview itself
+    for (todo_item_model of model.items) {
+        state = create_todoitem_viewstate(todo_item_model);
+        //vs.item_states.push(state);
+        todoitem_layout(state, vs.item_container);
         todoitem_render(state);
     }
+    //also - what will happen when an item gets created or deleted??
+    // for (todo_item of model.items) {
+    //     var view_state
+    //     //get corresponding view state ? 
+    //     //probably bad, should be referencing the todoitemview itself
+    //     todoitem_render(state);
+    // }
 }

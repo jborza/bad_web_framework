@@ -19,9 +19,9 @@ function create_todo(title){
     return create_todo(title, false);
 }
 
-function create_todo(title, finished){
+function create_todo(title, done){
     return {
         title: title,
-        finished: finished
+        done: done
     }
 }
