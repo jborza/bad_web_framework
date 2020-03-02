@@ -3,7 +3,8 @@ function create_sample_list() {
     array.push(create_todo('Read a C tutorial online', true));
     array.push(create_todo('Read about HTML', true));
     array.push(create_todo('Write a web framework', false));
-    array.push(create_todo('Fix edit/read mode for todoitemview'));
+    array.push(create_todo('Style the filter radio buttons', true));
+    array.push(create_todo('Fix todoitemview render state', true));
     array.push(create_todo('Style the "done" checkbox'));
     array.push(create_todo('Style the Save button'));
     array.push(create_todo('Implement the "Clear completed" button'));
