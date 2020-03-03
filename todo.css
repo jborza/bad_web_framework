@@ -38,13 +38,12 @@ body {
 }
 
 .app .editbox {
-    color: red;
     width: 320px;
     font-size: 24px;
 }
 
 .new-item {
-    padding: 0 0 0 64px;
+    padding-left: 48px;
 }
 
 .app .filter label {
@@ -60,12 +59,19 @@ body {
     background: #ccc;
 }
 
-.item span{
-    font-size:24px;
+.item span {
+    font-size: 24px;
 }
 
-.item input[type=checkbox]{
+.item input[type=checkbox] {
     transform: scale(1.6);
+    margin-right: 24px;
 }
+
+.item input[type=button] {
+    font-size: 16px;
+    margin-left: 16px;
+}
+
 
 /* TODO add strikethrough on completed items */
