@@ -73,5 +73,10 @@ body {
     margin-left: 16px;
 }
 
+.new-item input[type=button] {
+    font-size: 16px;
+    margin-left: 16px;
+}
+
 
 /* TODO add strikethrough on completed items */
