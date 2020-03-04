@@ -5,13 +5,14 @@ function create_sample_list() {
     array.push(create_todo('Write a web framework', false));
     array.push(create_todo('Style the filter radio buttons', true));
     array.push(create_todo('Fix todoitemview render state', true));
-    array.push(create_todo('Style the "done" checkbox'));
-    array.push(create_todo('Style the Save button'));
+    array.push(create_todo('Style the "done" checkbox', true));
+    array.push(create_todo('Style the Save button', true));
     array.push(create_todo('Implement the "Clear completed" button'));
     array.push(create_todo('Strikethrough done items'));
     array.push(create_todo('Add a delete button'));
     array.push(create_todo('Signal todo state change to parent model'));
     array.push(create_todo('Apply filter - all, in progress, done'));
+    array.push(create_todo('Save the new item', true));
     return array;
 }
 

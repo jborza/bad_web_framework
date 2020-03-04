@@ -3,7 +3,7 @@ function create_todolist_viewstate(model) {
         model: model,
         container: null,
         empty_item_view: null,
-        item_container : null,
+        item_container: null,
         item_status_counter: null,
         item_filter: null,
         clear_completed: null,
@@ -14,6 +14,13 @@ function create_todolist_viewstate(model) {
 function clear_completed_handler(viewstate, target) {
     console.log("TODO clear completed todos");
     //TODO invalidate
+    listview_render(viewstate);
+}
+
+function save_new_item_signal_handler(viewstate, parameters) {
+    console.log("todolistview handle signal: ", parameters, " vs: ", viewstate);
+    var new_item = create_todo(parameters);
+    viewstate.model.items.unshift(new_item);
     listview_render(viewstate);
 }
 
@@ -53,10 +60,6 @@ function filter_layout(vs, filter_container) {
     add_child(filter_container, done_label);
 }
 
-function save_new_item_signal_handler(parameters) {
-    console.log("todolistview handle signal: ", parameters);
-}
-
 function listview_layout(vs) {
     vs.container = create_element("div");
 
@@ -69,12 +72,12 @@ function listview_layout(vs) {
     vs.empty_item_view = undefined;
     var empty_item_state = create_empty_item_viewstate();
     empty_todoitem_layout(empty_item_state, empty_item_container);
-    connect_signal(SIGNAL_SAVE_NEW_ITEM, save_new_item_signal_handler);
+    connect_signal(SIGNAL_SAVE_NEW_ITEM, save_new_item_signal_handler, vs);
     add_child(vs.container, empty_item_container);
 
     //render children
     vs.item_container = create_element("div");
-    
+
     add_child(vs.container, vs.item_container);
 
     //render [x] item left (counter of not items not done)
@@ -102,8 +105,8 @@ function listview_render(vs) {
     set_text_content(vs.item_status_counter, getItemsLeft(vs.model) + " items left");
 
     //TODO highlight the filter (all/active/done)
-    
 
+    clear_children(vs.item_container);
     //update items
     for (todo_item_model of model.items) {
         state = create_todoitem_viewstate(todo_item_model);
