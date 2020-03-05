@@ -5,7 +5,7 @@ function create_todolist_viewstate(model) {
         empty_item_view: null,
         item_container: null,
         item_status_counter: null,
-        item_filter: null,
+        item_filter: FILTER_ALL,
         clear_completed: null,
         item_states: []
     }
@@ -26,6 +26,11 @@ function item_checked_handler(viewstate, parameters){
     update_item_count(viewstate);
 }
 
+function filter_change_handler(viewstate, event){
+    viewstate.item_filter = event.target.value;
+    listview_render(viewstate);
+}
+
 function filter_layout(vs, filter_container) {
     var filter_label = create_element("span");
     set_text_content(filter_label, "Show:");
@@ -35,9 +40,9 @@ function filter_layout(vs, filter_container) {
     var all = create_element("input");
     set_attribute(all, "type", "radio");
     set_attribute(all, "name", "filter");
-    set_attribute(all, "value", "all");
-    //TODO move to render
+    set_attribute(all, "value", FILTER_ALL);
     set_attribute(all, "checked", "checked");
+    add_change_handler(all, filter_change_handler, vs);
     var all_label = create_element("label");
     set_text_content(all_label, "All");
     add_child(all_label, all);
@@ -46,7 +51,8 @@ function filter_layout(vs, filter_container) {
     var active = create_element("input");
     set_attribute(active, "type", "radio");
     set_attribute(active, "name", "filter");
-    set_attribute(active, "value", "active");
+    set_attribute(active, "value", FILTER_IN_PROGRESS);
+    add_change_handler(active, filter_change_handler, vs);
     var active_label = create_element("label");
     set_text_content(active_label, "In progress");
     add_child(active_label, active);
@@ -55,7 +61,8 @@ function filter_layout(vs, filter_container) {
     var done = create_element("input");
     set_attribute(done, "type", "radio");
     set_attribute(done, "name", "filter");
-    set_attribute(done, "value", "done");
+    set_attribute(done, "value", FILTER_DONE);
+    add_change_handler(done, filter_change_handler, vs);
     var done_label = create_element("label");
     set_text_content(done_label, "Done");
     add_child(done_label, done);
@@ -105,7 +112,7 @@ function listview_layout(vs) {
 }
 
 function update_item_count(vs){
-    set_text_content(vs.item_status_counter, getItemsLeft(vs.model) + " items left");
+    set_text_content(vs.item_status_counter, get_items_left(vs.model) + " items left");
 }
 
 function listview_render(vs) {
@@ -115,7 +122,8 @@ function listview_render(vs) {
 
     clear_children(vs.item_container);
     //update items
-    for (todo_item_model of model.items) {
+    var filtered_items = filter_items(model, vs.item_filter);
+    for (todo_item_model of filtered_items) {
         state = create_todoitem_viewstate(todo_item_model);
         todoitem_layout(state, vs.item_container);
         todoitem_render(state);
