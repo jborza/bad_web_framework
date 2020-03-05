@@ -12,20 +12,17 @@ function create_todolist_viewstate(model) {
 }
 
 function clear_completed_handler(viewstate, target) {
-    console.log("TODO clear completed todos");
-    //TODO invalidate
+    clear_completed_items(viewstate.model);
     listview_render(viewstate);
 }
 
 function save_new_item_signal_handler(viewstate, parameters) {
-    console.log("todolistview handle signal: ", parameters, " vs: ", viewstate);
     var new_item = create_todo(parameters);
     viewstate.model.items.unshift(new_item);
     listview_render(viewstate);
 }
 
 function item_checked_handler(viewstate, parameters){
-    console.log('handling redisplay_done_items');
     update_item_count(viewstate);
 }
 

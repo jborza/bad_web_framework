@@ -25,3 +25,7 @@ function create_todo(title, done){
         done: done
     }
 }
+
+function clear_completed_items(model){
+    model.items = model.items.filter(x => !x.done);
+}
