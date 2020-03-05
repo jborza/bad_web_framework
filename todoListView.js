@@ -24,6 +24,11 @@ function save_new_item_signal_handler(viewstate, parameters) {
     listview_render(viewstate);
 }
 
+function item_checked_handler(viewstate, parameters){
+    console.log('handling redisplay_done_items');
+    update_item_count(viewstate);
+}
+
 function filter_layout(vs, filter_container) {
     var filter_label = create_element("span");
     set_text_content(filter_label, "Show:");
@@ -83,6 +88,7 @@ function listview_layout(vs) {
     //render [x] item left (counter of not items not done)
     vs.item_status_counter = create_element("span");
     add_child(vs.container, vs.item_status_counter);
+    connect_signal(SIGNAL_ITEM_DONE_CHECKED, item_checked_handler, vs);
 
     //render selector for all / active / completed ()
     var filter_container = create_element("div");
@@ -101,8 +107,12 @@ function listview_layout(vs) {
     add_child(get_root(), vs.container);
 }
 
-function listview_render(vs) {
+function update_item_count(vs){
     set_text_content(vs.item_status_counter, getItemsLeft(vs.model) + " items left");
+}
+
+function listview_render(vs) {
+    update_item_count(vs);
 
     //TODO highlight the filter (all/active/done)
 
@@ -110,15 +120,7 @@ function listview_render(vs) {
     //update items
     for (todo_item_model of model.items) {
         state = create_todoitem_viewstate(todo_item_model);
-        //vs.item_states.push(state);
         todoitem_layout(state, vs.item_container);
         todoitem_render(state);
     }
-    //also - what will happen when an item gets created or deleted??
-    // for (todo_item of model.items) {
-    //     var view_state
-    //     //get corresponding view state ? 
-    //     //probably bad, should be referencing the todoitemview itself
-    //     todoitem_render(state);
-    // }
 }

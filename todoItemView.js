@@ -1,3 +1,5 @@
+const SIGNAL_ITEM_DONE_CHECKED = "SIGNAL_ITEM_DONE_CHECKED";
+
 function create_todoitem_viewstate(item) {
     return {
         item: item,
@@ -29,6 +31,7 @@ function edit_clicked_handler(viewstate, target) {
 function checkbox_checked_handler(viewstate, target) {
     viewstate.item.done = get_checkbox_checked(viewstate.checkbox);
     console.log("setting done of" + viewstate.item.title + " to " + viewstate.item.done);
+    raise_signal(SIGNAL_ITEM_DONE_CHECKED, viewstate.item.title);
 }
 
 //vs = viewstate
