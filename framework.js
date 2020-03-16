@@ -39,6 +39,11 @@ function add_click_handler(el, handler, viewstate) {
     el.onclick = wrapped_handler;
 }
 
+function add_double_click_handler(el, handler, viewstate) {
+    var wrapped_handler = curry(handler, viewstate);
+    el.ondblclick = wrapped_handler;
+}
+
 function add_change_handler(el, handler, viewstate) {
     var wrapped_handler = curry(handler, viewstate);
     el.onchange = wrapped_handler;

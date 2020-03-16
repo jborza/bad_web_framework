@@ -46,6 +46,7 @@ function todoitem_layout(vs, root_container) {
 
     vs.label = create_element("span");
     add_child(vs.container, vs.label);
+    add_double_click_handler(vs.label, edit_clicked_handler, vs);
 
     vs.edit_button = create_element("input");
     set_attribute(vs.edit_button, "type", "button");
