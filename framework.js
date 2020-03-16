@@ -56,6 +56,10 @@ function set_style_textdecoration(el, value) {
     el.style.textDecoration = value;
 }
 
+function set_style_fontweight(el, value) {
+    el.style.fontWeight = value;
+}
+
 function curry(fn, ...args) {
     return (..._arg) => {
         return fn(...args, ..._arg);

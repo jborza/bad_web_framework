@@ -22,11 +22,11 @@ function save_new_item_signal_handler(viewstate, parameters) {
     listview_render(viewstate);
 }
 
-function item_checked_handler(viewstate, parameters){
+function item_checked_handler(viewstate, parameters) {
     update_item_count(viewstate);
 }
 
-function filter_change_handler(viewstate, event){
+function filter_change_handler(viewstate, event) {
     viewstate.item_filter = event.target.value;
     listview_render(viewstate);
 }
@@ -91,6 +91,7 @@ function listview_layout(vs) {
 
     //render [x] item left (counter of not items not done)
     vs.item_status_counter = create_element("span");
+    set_style_fontweight(vs.item_status_counter, "bold");
     add_child(vs.container, vs.item_status_counter);
     connect_signal(SIGNAL_ITEM_DONE_CHECKED, item_checked_handler, vs);
 
@@ -111,14 +112,12 @@ function listview_layout(vs) {
     add_child(get_root(), vs.container);
 }
 
-function update_item_count(vs){
+function update_item_count(vs) {
     set_text_content(vs.item_status_counter, get_items_left(vs.model) + " items left");
 }
 
 function listview_render(vs) {
     update_item_count(vs);
-
-    //TODO highlight the filter (all/active/done)
 
     clear_children(vs.item_container);
     //update items
