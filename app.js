@@ -8,7 +8,7 @@ function create_sample_list() {
     array.push(create_todo('Style the "done" checkbox', true));
     array.push(create_todo('Style the Save button', true));
     array.push(create_todo('Implement the "Clear completed" button', true));
-    array.push(create_todo('Strikethrough done items'));
+    array.push(create_todo('Strikethrough done items', true));
     array.push(create_todo('Count items in progress', true));
     array.push(create_todo('Add a delete button'));
     array.push(create_todo('Apply filter - all, in progress, done', true));

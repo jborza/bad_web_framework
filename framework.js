@@ -52,6 +52,10 @@ function get_checkbox_checked(el) {
     return el.checked;
 }
 
+function set_style_textdecoration(el, value) {
+    el.style.textDecoration = value;
+}
+
 function curry(fn, ...args) {
     return (..._arg) => {
         return fn(...args, ..._arg);

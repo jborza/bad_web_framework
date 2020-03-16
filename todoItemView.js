@@ -32,6 +32,7 @@ function checkbox_checked_handler(viewstate, target) {
     viewstate.item.done = get_checkbox_checked(viewstate.checkbox);
     console.log("setting done of" + viewstate.item.title + " to " + viewstate.item.done);
     raise_signal(SIGNAL_ITEM_DONE_CHECKED, viewstate.item.title);
+    todoitem_render(viewstate);
 }
 
 //vs = viewstate
@@ -79,4 +80,5 @@ function todoitem_render(vs) {
     set_text_content(vs.label, vs.item.title);
     set_value(vs.editbox, vs.item.title);
     set_checkbox_checked(vs.checkbox, vs.item.done);
+    set_style_textdecoration(vs.label, vs.item.done ? "line-through" : "");
 }
